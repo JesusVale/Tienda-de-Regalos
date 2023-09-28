@@ -1,14 +1,31 @@
-const {Compra} = require("../models")
+const {Compra, ArticuloCompra} = require("../models")
 
 class compraDAO{
-    async crearCompra(id_usuario, metodo_pago, total){
-        try{
-            const compra = await Compra.create({id_usuario, metodo_pago, total})
+    async crearCompra(id_usuario, metodo_pago, total, articulos){
+
+        const transaction = await Compra.sequelize.transaction();
+
+        try {
+            const compra = await Compra.create({ id_usuario, metodo_pago, total }, { transaction });
+
+            for (let i = 0; i < articulos.length; i++) {
+                await ArticuloCompra.create({ 
+                    id_articulo: articulos[i].id,
+                    id_compra: compra.id,
+                    cantidad: articulos[i].cantidad 
+                }, { transaction });
+            }
+
+            await transaction.commit();
+
             return compra;
-        } catch(error){
+        } catch (error) {
+            await transaction.rollback();
+
             throw error;
         }
     }
+
     async eliminarCompra(id) {
         try {
             const compra = await Compra.findByPk(id);

@@ -45,27 +45,12 @@ class ArticuloDAO{
         }
     }
 
-    async actualizarArticulo(id, nuevaDescripcion, nuevoPrecio, nuevaImagen, nuevoStock) {
-        try {
-            const [numRowsUpdated, updatedArticulo] = await Articulo.update(
-                {
-                    descripcion: nuevaDescripcion,
-                    precio: nuevoPrecio,
-                    imagen: nuevaImagen,
-                    stock: nuevoStock,
-                },
-                {
-                    where: { id },
-                    returning: true, 
-                }
-            );
-
-            if (numRowsUpdated === 0) {
-                throw new Error('Artículo no encontrado');
-            }
-
-            return updatedArticulo[0];
-        } catch (error) {
+    async actualizarComentarioPoId(id, descripcion, precio, imagen, stock){
+        try{
+            await Articulo.update({descripcion, precio, imagen, stock}, {where: id});
+            const articulo = await Articulo.findByPk(id);
+            return articulo;
+        } catch(error){
             throw error;
         }
     }

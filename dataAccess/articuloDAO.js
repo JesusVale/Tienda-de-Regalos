@@ -56,3 +56,4 @@ class ArticuloDAO{
     }
     
 }
+module.exports = ArticuloDAO;

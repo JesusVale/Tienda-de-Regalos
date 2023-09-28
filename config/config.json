@@ -1,7 +1,7 @@
 {
   "development": {
     "username": "root",
-    "password": "123456789",
+    "password": "root",
     "database": "tienda_regalos",
     "host": "127.0.0.1",
     "dialect": "mysql"

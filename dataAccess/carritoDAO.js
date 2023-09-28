@@ -2,7 +2,7 @@ const {Carrito} = require("../models")
 class CarritoDAO{
     async crearCarrito(id_articulo, id_usuario){
         try{
-            const carrito = await Articulo.create({id_articulo, id_usuario})
+            const carrito = await Carrito.create({id_articulo, id_usuario})
             return carrito;
         } catch(error){
             throw error;

@@ -54,3 +54,4 @@ class ComentarioDAO{
     }
     
 }
+module.exports = ComentarioDAO;

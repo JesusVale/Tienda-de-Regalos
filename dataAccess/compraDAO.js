@@ -24,7 +24,7 @@ class compraDAO{
         try {
             const compra = await Compra.findByPk(id);
             if (!compra) {
-                throw new Error('Artículo no encontrado');
+                throw new Error('Compra no encontrada');
             }
 
             return compra;
@@ -52,3 +52,4 @@ class compraDAO{
         }
     }
 }
+module.exports = compraDAO;

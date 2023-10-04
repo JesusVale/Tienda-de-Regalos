@@ -39,7 +39,7 @@ class CarritoDAO{
             if(!carrito){
                 throw new Error("Carrito no encontrado");
             }
-            await comentario.destroy();
+            await carrito.destroy();
             return "Carrito eliminado con éxito"
         } catch(error){
             throw error;
